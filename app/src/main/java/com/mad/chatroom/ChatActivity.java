@@ -36,6 +36,7 @@ public class ChatActivity extends AppCompatActivity implements FirebaseMessageHa
     String userUID;
     FirebaseAuth.AuthStateListener mAuthListener;
     ValueEventListener v;
+    String userDisplayName;
     FirebaseMessageHandler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +55,8 @@ public class ChatActivity extends AppCompatActivity implements FirebaseMessageHa
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    userUID = user.getUid();
-                    Log.d("user",userUID);
+
                     // User is signed in
-                    Log.d("demo", "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
                     Log.d("demo", "onAuthStateChanged:signed_out");
@@ -81,24 +80,11 @@ public class ChatActivity extends AppCompatActivity implements FirebaseMessageHa
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user!=null) {
+            userDisplayName=user.getDisplayName();
             final String uid = user.getUid();
-
-            v = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    currentUser = dataSnapshot.child("User").child(uid).getValue(User.class);
-                    tv_name.setText(currentUser.getfName()+" "+ currentUser.getlName());
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-            rootRef.addValueEventListener(v);
-
-
             handler.retrieveMessages();
+            //Log.d("DISPLAYNAME:",userDisplayName);
+            tv_name.setText(userDisplayName);
 
 
         }else{

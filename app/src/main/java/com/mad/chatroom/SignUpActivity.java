@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,6 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference rootRef;
     String userUID;
+    String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +60,10 @@ public class SignUpActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    userUID = user.getUid();
-                    // User is signed in
-                    Log.d("demo", "onAuthStateChanged:signed_in:" + user.getUid());
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(name).build();
+                    user.updateProfile(profileUpdates);
+
                 } else {
                     // User is signed out
                     Log.d("demo", "onAuthStateChanged:signed_out");
@@ -76,6 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
                 final String lName = editTextLname.getText().toString().trim();
                 final String email = editTextEmail.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
+                name=fName+" "+lName;
                 String confirmPassword = editTextConfirmPassword.getText().toString().trim();
 
                 if(!(fName.equals("") || lName.equals("") || email.equals("") || password.equals("")) && password.equals(confirmPassword) ){
