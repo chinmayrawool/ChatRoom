@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public class MessageObj {
-    String content, name;
+    String content, name,id;
     long  time;
     Boolean textFlag;
     String comments;
@@ -15,11 +15,20 @@ public class MessageObj {
     public MessageObj() {
     }
 
-    public MessageObj(String content, String name, long time, Boolean textFlag) {
+    public MessageObj(String id, String content, String name, long time, Boolean textFlag) {
+        this.id =id;
         this.content = content;
         this.name = name;
         this.time = time;
         this.textFlag = textFlag;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getComments() {

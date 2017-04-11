@@ -89,12 +89,9 @@ public class SignUpActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
                                         Toast.makeText(SignUpActivity.this, "User has been created", Toast.LENGTH_SHORT).show();
-                                        User user = new User(fName,lName,email);
-
-                                        rootRef.child("User").child(userUID).setValue(user);
 
                                         finish();
-                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+//                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
 
 
                                     }

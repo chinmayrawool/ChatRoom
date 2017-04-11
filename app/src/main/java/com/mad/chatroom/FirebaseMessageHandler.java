@@ -77,7 +77,7 @@ public class FirebaseMessageHandler {
         for (DataSnapshot ds: dataSnapshot.getChildren()) {
             Log.d("firebase",ds.toString());
             //String content, String name, long time, Boolean textFlag
-            MessageObj message = new MessageObj(ds.getValue(MessageObj.class).getContent(),ds.getValue(MessageObj.class).getName(),ds.getValue(MessageObj.class).getTime(),ds.getValue(MessageObj.class).getTextFlag());
+            MessageObj message = new MessageObj(ds.getValue(MessageObj.class).getId(),ds.getValue(MessageObj.class).getContent(),ds.getValue(MessageObj.class).getName(),ds.getValue(MessageObj.class).getTime(),ds.getValue(MessageObj.class).getTextFlag());
             message.setComments(ds.getValue(MessageObj.class).getComments());
             Log.d("demo","In Handler, City:"+message.toString());
             messages.add(message);

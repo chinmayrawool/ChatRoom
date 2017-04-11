@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             //Intent to profile activity
             finish();
             Log.d("demo","Intent to profile activity");
-            startActivity(new Intent(getApplicationContext(),ChatActivity.class));
+            //startActivity(new Intent(getApplicationContext(),ChatActivity.class));
         }
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
